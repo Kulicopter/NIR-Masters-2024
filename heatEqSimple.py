@@ -10,7 +10,7 @@ nodes = 101
 # Инициализация
 dt = 1/10000
 dx = np.sqrt(2 * a * dt)
-nodes = int(np.round(length/dx))
+nodes = 101
 
 t_nodes = int(time/dt)
 
@@ -20,15 +20,13 @@ xx = np.linspace(-1*np.pi /2.0, np.pi /2.0, nodes+1)
 d = 5
 lam = 500
 psi = 2
-u = np.sin(np.abs(xx))*lam*psi
+u = np.sin(np.abs(xx))*100
 
 
 # Визуализация с графикой
 fig, axis = plt.subplots()
 
-pcm = axis.pcolormesh([u], cmap='rainbow', vmin=0, vmax=1000)
-plt.colorbar(pcm, ax=axis)
-axis.set_ylim([-2, 3])
+plt.plot(xx + np.pi,u)
 
 # Симуляция
 counter = 0
@@ -65,7 +63,11 @@ while counter < time  :
 
     # Обновление графика
     if int(counter/dt) % 10 == 0:
-        pcm.set_array([u])
+        plt.clf()
+        plt.plot(xx + np.pi/2, u)
+        plt.ylim(0, 100)
+        plt.xlim(0, np.pi)
+
         axis.set_title("Distribution at t: {:.3f} [s].".format(counter))
         plt.pause(0.0001)
 
